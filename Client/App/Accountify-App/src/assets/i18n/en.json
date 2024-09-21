@@ -1,0 +1,20 @@
+{
+  "HOME": "Home",
+  "SERVICES": "Services",
+  "ABOUT": "About Us",
+  "CONTACT": "Contact",
+  "LOGIN": "Login",
+  "TITLE": "Expert Accounting Consultation Services",
+  "DESCRIPTION": "Helping businesses and individuals manage their finances with professional accounting solutions.",
+  "GET_STARTED": "Get Started",
+  "SERVICES_TITLE": "Our Services",
+  "FEATURE_FINANCIAL_CONSULTATION": "Financial Consultation",
+  "FEATURE_FINANCIAL_CONSULTATION_DESC": "Expert advice to manage your personal or business finances effectively.",
+  "FEATURE_TAX_PLANNING": "Tax Planning",
+  "FEATURE_TAX_PLANNING_DESC": "Reduce your tax liabilities with strategic tax planning and filing.",
+  "FEATURE_BOOKKEEPING": "Bookkeeping Services",
+  "FEATURE_BOOKKEEPING_DESC": "Accurate bookkeeping to keep your financial records up-to-date.",
+  "CTA_TITLE": "Ready to simplify your finances?",
+  "CONTACT_US": "Contact Us Today",
+  "FOOTER_COPYRIGHT": "All Rights Reserved"
+}
