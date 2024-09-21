@@ -1,0 +1,44 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+// Factory function for loading translation files
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+@Component({
+  selector: 'app-root', 
+  standalone: true,
+  imports: [CommonModule, RouterOutlet,TranslateModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+protected switchLanguage(language: string) {
+  console.log("switching language...")
+  this.translate.use(language);  // Use the selected language
+
+  // Adjust direction for RTL (Hebrew or Arabic) or LTR (English)
+  if (language === 'he' || language === 'ar') {
+    // Set direction to right-to-left for Hebrew and Arabic
+    document.documentElement.setAttribute('dir', 'rtl');
+    document.documentElement.setAttribute('lang', language);
+  } else {
+    // Set direction to left-to-right for English (or any LTR language)
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', language);
+  }
+}
+  constructor(public translate: TranslateService) {
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang?.match(/en|fr/) ? browserLang : 'en');
+  }
+  title = 'Accountify-App';
+}
