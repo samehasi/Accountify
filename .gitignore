@@ -128,3 +128,104 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# .NET Core
+bin/
+obj/
+
+# Build directories
+out/
+
+# User-specific files
+*.vsconfig
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.userprefs
+
+# Rider
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Local development files
+*.swp
+*.sln.docstates
+*._ReSharper.*
+_ReSharper.Caches/
+
+# NCrunch
+*.ncrunchproject
+*.ncrunchsolution
+*.ncrunchstate
+
+# StyleCop
+StyleCopCache.xml
+
+# Entity Framework
+*.ldb
+*.mdf
+*.ndf
+*.ldf
+
+# Database files
+*.dbmdl
+*.dbproj
+
+# Azure deployment files
+.publish/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NPM packages and dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# JetBrains Rider
+.idea/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuspec
+.nuget/packages/
+.nuget/repository/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Backup & built files
+*_backup*
+*.bak
+*.db
+*.dll
+*.exe
+*.pdb
+*.sql
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+
+# Publish outputs
+*.publishsettings
+
+# Coverage and Code Analysis
+coverage/
+*.coverage
+*.coveragexml
+*.results.xml
+.Dockerfile
+
+# Dependency and Package Manager files
+package-lock.json
+packages/
+dist/
