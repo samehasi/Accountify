@@ -21,15 +21,12 @@
   </nav>
 </header>
 
-<button (click)="getWeather()">GetWeather</button> <!-- Arabic -->
-
-
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
     <h2>{{ 'TITLE' | translate }}</h2>
     <p>{{ 'DESCRIPTION' | translate }}</p>
-    <a href="#" class="btn-primary">{{ 'GET_STARTED' | translate }}</a>
+    <a href="#" class="btn-primary" (click)="getWeather()">{{ 'GET_STARTED' | translate }} (Test Connection to the server)</a>
   </div>
 </section>
 

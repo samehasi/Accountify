@@ -42,11 +42,11 @@ protected switchLanguage(language: string) {
   }
 }
   constructor(public translate: TranslateService,private weatherForecastClient: Client) {
-    translate.addLangs(['en', 'fr']);
+    translate.addLangs(['en', 'he' , 'ar']);
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang?.match(/en|fr/) ? browserLang : 'en');
+    translate.use(browserLang?.match(/en|he|ar/) ? browserLang : 'en');
   }
   title = 'Accountify-App';
 }
