@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Client, WeatherForecast } from './api-client';
 import { BASE_URL } from '../../Tokens/tokens';
+import { Observable, map, of, tap } from 'rxjs';
 
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
@@ -22,9 +23,19 @@ export function HttpLoaderFactory(http: HttpClient) {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
+serverResponse:Observable<string> | undefined;
+
 protected getWeather() {
-   this.weatherForecastClient.getWeatherForecast().then(res => console.log(JSON.stringify(res)));
+    this.serverResponse= this.weatherForecastClient.getWeatherForecast().pipe(
+map (x => {
+  const str = JSON.stringify(x);
+  console.log(x);
+  return str;
+}
+)
+      );
 }
 protected switchLanguage(language: string) {
   console.log("switching language...")

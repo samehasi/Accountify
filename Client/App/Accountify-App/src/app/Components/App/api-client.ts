@@ -7,7 +7,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { BASE_URL } from "../../Tokens/tokens";
 import { HttpClient } from "@angular/common/http";
-import { firstValueFrom, map, switchMap } from "rxjs";
+import { Observable, firstValueFrom, map, switchMap } from "rxjs";
 
 /* tslint:disable */
 /* eslint-disable */
@@ -28,7 +28,7 @@ export class Client {
     /**
      * @return Success
      */
-    getWeatherForecast(): Promise<WeatherForecast[]> {
+    getWeatherForecast(): Observable<WeatherForecast[]> {
         let url_ = this.baseUrl + "/WeatherForecast";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -41,9 +41,9 @@ export class Client {
             }
         };
 
-        return firstValueFrom( this.http.get<any>(url_).pipe(map((_response: Response) => {
+        return this.http.get<any>(url_).pipe(map((_response: Response) => {
             return _response as unknown as WeatherForecast[] ;
-        })));
+        }));
     }
 
     protected processGetWeatherForecast(response: Response): Promise<WeatherForecast[]> {
