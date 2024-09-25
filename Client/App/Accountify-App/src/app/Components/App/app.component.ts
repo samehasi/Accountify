@@ -1,6 +1,6 @@
 import { Component, importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -8,8 +8,12 @@ import { Client, WeatherForecast } from './api-client';
 import { BASE_URL } from '../../Tokens/tokens';
 import { Observable, map, of, tap } from 'rxjs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatButtonModule} from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { LoginComponent } from '../login/login.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatListModule } from '@angular/material/list';  
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -19,17 +23,23 @@ export function HttpLoaderFactory(http: HttpClient) {
   selector: 'app-root', 
   standalone: true,
   imports: [CommonModule,
-     RouterOutlet,
+    RouterModule,
      TranslateModule,
      MatSlideToggleModule,
      MatButtonModule,
+     MatButtonToggleModule,
+     LoginComponent,
+     MatToolbarModule,
+     MatListModule,
+     MatCardModule,
      MatButtonToggleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 
-export class AppComponent {
+export class HomeComponent {
 serverResponse:Observable<string> | undefined;
+features: any;
 
 protected getWeather() {
     this.serverResponse= this.weatherForecastClient.getWeatherForecast().pipe(
