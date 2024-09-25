@@ -1,9 +1,10 @@
-<div>
-  <!-- Language Switcher -->
-  <button (click)="switchLanguage('en')">English</button>
-  <button (click)="switchLanguage('he')">עברית</button> <!-- Hebrew -->
-  <button (click)="switchLanguage('ar')">العربية</button> <!-- Arabic -->
-</div>
+
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle (change)="switchLanguage($event.value)"  value="ar">العربية</mat-button-toggle>
+  <mat-button-toggle (change)="switchLanguage($event.value)"  value="he">עברית</mat-button-toggle>
+  <mat-button-toggle (change)="switchLanguage($event.value)" value="en">English</mat-button-toggle>
+</mat-button-toggle-group>
+
 
 <!-- Header Section -->
 <header>

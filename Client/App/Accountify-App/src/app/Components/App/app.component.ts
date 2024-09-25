@@ -7,7 +7,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Client, WeatherForecast } from './api-client';
 import { BASE_URL } from '../../Tokens/tokens';
 import { Observable, map, of, tap } from 'rxjs';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -16,10 +18,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 @Component({
   selector: 'app-root', 
   standalone: true,
-  imports: [CommonModule, RouterOutlet,TranslateModule],
-  providers: [
-    { provide: BASE_URL, useValue: 'https://localhost:5001' } // Provide the base URL globally
-  ],
+  imports: [CommonModule,
+     RouterOutlet,
+     TranslateModule,
+     MatSlideToggleModule,
+     MatButtonModule,
+     MatButtonToggleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
