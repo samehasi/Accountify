@@ -14,7 +14,7 @@ import { changeLanguage } from '../../State/app.actions';
 export class RootComponent {
   constructor(private store: Store) {
     // Dispatch the default language at app initialization
-    const defaultLanguage = 'en'; // Set your default language here
-    this.store.dispatch(changeLanguage({ language: defaultLanguage }));
+    //const defaultLanguage = 'en'; // Set your default language here
+    //this.store.dispatch(changeLanguage({ language: defaultLanguage }));
   }
 }
