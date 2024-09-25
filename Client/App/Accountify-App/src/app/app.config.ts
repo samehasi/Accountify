@@ -10,14 +10,14 @@ import { provideState, provideStore } from '@ngrx/store';
 import { quizFeature } from './State/app.feature';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import * as appEffects from './State/app.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppEffects } from './State/app.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
     provideStore(), 
     provideState(quizFeature),
-    provideEffects(appEffects),
+    provideEffects(AppEffects),
     provideStoreDevtools({
       maxAge: 25
     }),

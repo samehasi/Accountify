@@ -14,6 +14,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';  
+import { Store } from '@ngrx/store';
+import { changeLanguage } from '../../State/app.actions';
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,25 +55,11 @@ map (x => {
 }
 protected switchLanguage(language: string) {
   console.log("switching language...")
+  this.store.dispatch(changeLanguage({ language }));
   this.translate.use(language);  // Use the selected language
 
-  // Adjust direction for RTL (Hebrew or Arabic) or LTR (English)
-  if (language === 'he' || language === 'ar') {
-    // Set direction to right-to-left for Hebrew and Arabic
-    document.documentElement.setAttribute('dir', 'rtl');
-    document.documentElement.setAttribute('lang', language);
-  } else {
-    // Set direction to left-to-right for English (or any LTR language)
-    document.documentElement.setAttribute('dir', 'ltr');
-    document.documentElement.setAttribute('lang', language);
-  }
 }
-  constructor(public translate: TranslateService,private weatherForecastClient: Client) {
-    translate.addLangs(['en', 'he' , 'ar']);
-    translate.setDefaultLang('en');
-
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang?.match(/en|he|ar/) ? browserLang : 'en');
+  constructor(public translate: TranslateService,private weatherForecastClient: Client,private store: Store) {
   }
   title = 'Accountify-App';
 }

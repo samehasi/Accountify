@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { QUIZ_INITIAL_STATE, QuizState } from './app.state';
-import { systemActions, userQuizActions } from './app.actions';
+import { changeLanguage, systemActions, userQuizActions } from './app.actions';
 
 export const quizReducer = createReducer(
   QUIZ_INITIAL_STATE,
@@ -15,10 +15,11 @@ export const quizReducer = createReducer(
       },
     ],
   })), 
-  on(systemActions.resetState, (_, action) => action.state)
+  on(systemActions.resetState, (_, action) => action.state),
+  on(changeLanguage, (state, { language }) => ({ ...state, language }))
+
 
 );
 function currentQuestion(state: QuizState) {
     throw new Error('Function not implemented.');
 }
-

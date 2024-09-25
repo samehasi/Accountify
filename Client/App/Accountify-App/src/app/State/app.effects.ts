@@ -1,10 +1,11 @@
-import { inject } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Actions, ROOT_EFFECTS_INIT, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, skip, take, tap } from "rxjs/operators";
 import { quizFeature } from "./app.feature";
-import { systemActions } from "./app.actions";
+import { changeLanguage, systemActions } from "./app.actions";
 import { QuizState } from "./app.state";
+import { TranslateService } from "@ngx-translate/core";
 
 export const saveToStorage = createEffect(() => inject(Store)
     .select(quizFeature.selectQuizState)
@@ -25,3 +26,24 @@ export const loadFromStorage = createEffect(() => inject(Actions).pipe(
 ), {
     functional: true
 });
+
+@Injectable()
+export class AppEffects {
+
+  constructor(
+    private actions$: Actions,  // NgRx Actions stream
+    private translateService: TranslateService  // ngx-translate service
+  ) {}
+
+  // Effect to handle language change
+  changeLanguage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(changeLanguage),  // Listen for the changeLanguage action
+      tap(action => {
+        // Perform the language switch by updating the TranslateService
+        this.translateService.use(action.language);
+      })
+    ),
+    { dispatch: false }  // We don't dispatch another action after this effect
+  );
+}

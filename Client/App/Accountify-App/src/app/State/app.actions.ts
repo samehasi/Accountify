@@ -1,4 +1,4 @@
-import { createActionGroup, emptyProps, props } from "@ngrx/store";
+import { createAction, createActionGroup, emptyProps, props } from "@ngrx/store";
 import { QuizState } from "./app.state";
 
 export const userQuizActions  = createActionGroup({
@@ -15,3 +15,9 @@ export const systemActions = createActionGroup({
         'reset state': props<{state: QuizState}>()
     }
 })
+
+
+export const changeLanguage = createAction(
+    '[Language] Change Language',
+    props<{ language: string }>()  // The language to switch to
+  );
