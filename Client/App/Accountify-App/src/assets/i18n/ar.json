@@ -17,6 +17,8 @@
     "CONTACT_US": "اتصل بنا اليوم",
     "FOOTER_COPYRIGHT": "جميع الحقوق محفوظة",
     "LOGIN": {
+      "SIGNUP": "حساب جديد",
+      "SIGNUPNOW": "إرسال",
       "TITLE": "تسجيل الدخول",
       "EMAIL": "البريد الإلكتروني",
       "PASSWORD": "كلمة المرور",

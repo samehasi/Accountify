@@ -20,7 +20,10 @@
       <a href="#" class="forgot-password">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</a>
     </mat-card-content>
   
-    <!-- Back Button -->
+
+    <a mat-raised-button color="accent" href="#" routerLink="/signup">{{ 'LOGIN.SIGNUP' | translate }}</a>
+
+   <!-- Back Button -->
     <mat-card-actions>
       <button mat-button color="accent" (click)="goBack()">Back</button>
     </mat-card-actions>

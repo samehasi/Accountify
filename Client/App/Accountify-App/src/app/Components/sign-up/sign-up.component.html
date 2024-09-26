@@ -1,0 +1,75 @@
+<mat-card class="sign-up-card">
+    <mat-card-header>
+      <mat-card-title>Sign Up</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  
+        <!-- Email -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email" required>
+          <!-- <mat-error *ngIf="f.email.invalid && f.email.touched">
+            <span *ngIf="f.email.errors?.required">Email is required</span>
+            <span *ngIf="f.email.errors?.email">Invalid email format</span>
+          </mat-error> -->
+        </mat-form-field>
+  
+        <!-- Password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter your password" required>
+          <!-- <mat-error *ngIf="f.password.invalid && f.password.touched">
+            <span *ngIf="f.password.errors?.required">Password is required</span>
+            <span *ngIf="f.password.errors?.minlength">Password must be at least 6 characters long</span>
+          </mat-error> -->
+        </mat-form-field>
+  
+        <!-- Name -->
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter your first name" required>
+          <!-- <mat-error *ngIf="f.name.invalid && f.name.touched">
+            Name is required
+          </mat-error> -->
+        </mat-form-field>
+  
+        <!-- Surname -->
+        <mat-form-field appearance="fill">
+          <mat-label>Surname</mat-label>
+          <input matInput formControlName="surname" placeholder="Enter your surname" required>
+          <!-- <mat-error *ngIf="f.surname.invalid && f.surname.touched">
+            Surname is required
+          </mat-error> -->
+        </mat-form-field>
+  
+        <!-- Telephone -->
+        <mat-form-field appearance="fill">
+          <mat-label>Telephone</mat-label>
+          <input matInput formControlName="telephone" placeholder="Enter your phone number" required>
+          <!-- <mat-error *ngIf="f.telephone.invalid && f.telephone.touched">
+            <span *ngIf="f.telephone.errors?.required">Telephone number is required</span>
+            <span *ngIf="f.telephone.errors?.pattern">Invalid phone number format</span>
+          </mat-error> -->
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <!-- <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
+          Sign Up
+        </button> -->
+
+        <button mat-raised-button color="primary" type="submit">
+            {{'LOGIN.SIGNUPNOW' | translate}}
+          </button>
+  
+      </form>
+    </mat-card-content>
+
+
+        <!-- Back Button -->
+        <mat-card-actions>
+            <button mat-button color="accent" (click)="goBack()">Back</button>
+          </mat-card-actions>
+  </mat-card>
+  

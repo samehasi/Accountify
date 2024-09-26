@@ -17,6 +17,8 @@
     "CONTACT_US": "צור קשר היום",
     "FOOTER_COPYRIGHT": "כל הזכויות שמורות",
     "LOGIN": {
+      "SIGNUP": "הירשם",
+      "SIGNUPNOW": "הירשם עכשיו",
       "TITLE": "התחברות",
       "EMAIL": "אימייל",
       "PASSWORD": "סיסמה",

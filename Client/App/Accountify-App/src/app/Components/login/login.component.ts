@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    RouterModule,
     TranslateModule
   ],
   templateUrl: './login.component.html',
