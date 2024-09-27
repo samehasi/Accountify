@@ -1,4 +1,4 @@
-import { Component, importProvidersFrom } from '@angular/core';
+import { ChangeDetectionStrategy, Component, importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -16,6 +16,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';  
 import { Store } from '@ngrx/store';
 import { changeLanguage } from '../../State/app.actions';
+import { LanguagePickerComponent as LanguagePicker } from '../language-picker/language-picker.component';
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,8 +25,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 @Component({
   selector: 'app-root', 
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule,
     RouterModule,
+    LanguagePicker,
      TranslateModule,
      MatSlideToggleModule,
      MatButtonModule,
@@ -41,7 +44,21 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export class HomeComponent {
 serverResponse:Observable<string> | undefined;
-features: any;
+
+features = [
+  {
+    title: 'FEATURE_FINANCIAL_CONSULTATION',
+    description: 'FEATURE_FINANCIAL_CONSULTATION_DESC'
+  },
+  {
+    title: 'FEATURE_TAX_PLANNING',
+    description: 'FEATURE_TAX_PLANNING_DESC'
+  },
+  {
+    title: 'FEATURE_BOOKKEEPING',
+    description: 'FEATURE_BOOKKEEPING_DESC'
+  }
+];
 
 protected getWeather() {
     this.serverResponse= this.weatherForecastClient.getWeatherForecast().pipe(
@@ -52,12 +69,6 @@ map (x => {
 }
 )
       );
-}
-protected switchLanguage(language: string) {
-  console.log("switching language...")
-  this.store.dispatch(changeLanguage({ language }));
-  this.translate.use(language);  // Use the selected language
-
 }
   constructor(public translate: TranslateService,private weatherForecastClient: Client,private store: Store) {
   }

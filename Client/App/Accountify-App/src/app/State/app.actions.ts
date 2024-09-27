@@ -21,3 +21,13 @@ export const changeLanguage = createAction(
     '[Language] Change Language',
     props<{ language: string }>()  // The language to switch to
   );
+
+  export const signUp = createAction(
+    '[Auth] Sign Up',
+    props<{ email: string , password: string }>()  // The language to switch to
+  );
+
+  export const signIn = createAction(
+    '[Auth] Sign In',
+    props<{ email: string , password: string }>()  // The language to switch to
+  );
