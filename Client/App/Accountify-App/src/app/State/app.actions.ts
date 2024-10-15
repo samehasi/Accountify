@@ -1,5 +1,5 @@
 import { createAction, createActionGroup, emptyProps, props } from "@ngrx/store";
-import { QuizState } from "./app.state";
+import { State } from "./app.state";
 
 export const userQuizActions  = createActionGroup({
     source: 'User Quiz', 
@@ -12,22 +12,48 @@ export const userQuizActions  = createActionGroup({
 export const systemActions = createActionGroup({
     source: 'System', 
     events: {
-        'reset state': props<{state: QuizState}>()
+        'reset state': props<{state: State}>()
     }
 })
 
-
 export const changeLanguage = createAction(
     '[Language] Change Language',
-    props<{ language: string }>()  // The language to switch to
+    props<{ language: string }>()
   );
 
   export const signUp = createAction(
     '[Auth] Sign Up',
-    props<{ email: string , password: string }>()  // The language to switch to
+    props<{ email: string , password: string }>()
   );
 
-  export const signIn = createAction(
+  export const signInRequest = createAction(
     '[Auth] Sign In',
-    props<{ email: string , password: string }>()  // The language to switch to
+    props<{ email: string , password: string }>()
+  );
+
+  export const signInSuccess = createAction(
+    '[Auth] Sign In Success',
+    props<{ token: string , timeout: Date }>()
+  );
+
+  export const signOut = createAction(
+    '[Auth] Sign Out'
+  );
+
+  export const signInError = createAction(
+    '[Auth] Sign In Error',
+    props<{ error: string }>()
+  );
+
+  export const signUpSuccess= createAction(
+    '[Auth] Sign Up Success' // The language to switch to
+  );
+
+  export const signUpError = createAction(
+    '[Auth] Sign Up Error',
+    props<{ error: string }>()  // The language to switch to
+  );
+
+  export const AuthDataReset= createAction(
+    '[Auth] Reset' // The language to switch to
   );

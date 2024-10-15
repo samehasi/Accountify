@@ -1,25 +1,22 @@
 import { createReducer, on } from '@ngrx/store';
-import { QUIZ_INITIAL_STATE, QuizState } from './app.state';
-import { changeLanguage, systemActions, userQuizActions } from './app.actions';
+import { INITIAL_STATE, RequestState, State } from './app.state';
+import { changeLanguage, signInRequest as signInRequest, signInError, signInSuccess, signOut, signUp as signUpRequest, signUpError, signUpSuccess, systemActions, userQuizActions } from './app.actions';
 
 export const quizReducer = createReducer(
-  QUIZ_INITIAL_STATE,
-  on(userQuizActions.reset, () => QUIZ_INITIAL_STATE),
-  on(userQuizActions.answerCurrentQuestion, (state, action) => ({
-    ...state,
-    answers: [
-      ...state.answers,
-      {
-        userAnswer: action.index,
-       // isCorrect: currentQuestion(state).correctAnswer === action.index,
-      },
-    ],
-  })), 
+  INITIAL_STATE,
+  on(userQuizActions.reset, () => INITIAL_STATE),
   on(systemActions.resetState, (_, action) => action.state),
-  on(changeLanguage, (state, { language }) => ({ ...state, language }))
+  on(changeLanguage, (state, { language }) => ({ ...state, language })),
+  on(signInSuccess, (state, { token,timeout }) => ({ ...state, authenticationStat:{...state.authenticationStat,signInState:'Success' as RequestState,token:token,tokenTimeout:timeout} })),
+  on(signInError, (state, { error }) => ({ ...state, authenticationStat:{...state.authenticationStat,signInState:'Failed' as RequestState,signInErrorMessage:error} })),
+  on(signUpSuccess, (state) => ({ ...state, authenticationStat:{...state.authenticationStat,signUpState:'Success' as RequestState} })),
+  on(signUpError, (state,{error}) => ({ ...state, authenticationStat:{...state.authenticationStat,signUpState:'Failed' as RequestState,signUpErrorMessage:error} })),
+  on(signOut, (state) => ({ ...state, authenticationStat:{...state.authenticationStat,token:null,tokenTimeout:null} })),
+  on(signInRequest, (state) => ({ ...state, authenticationStat:{...state.authenticationStat,token:null,tokenTimeout:null,signInState:'Running' as RequestState} })),
+  on(signUpRequest, (state) => ({ ...state, authenticationStat:{...state.authenticationStat,token:null,tokenTimeout:null,signUpState:'Running' as RequestState} }))
 
 
 );
-function currentQuestion(state: QuizState) {
+function currentQuestion(state: State) {
     throw new Error('Function not implemented.');
 }

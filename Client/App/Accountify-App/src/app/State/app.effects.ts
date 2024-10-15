@@ -1,10 +1,10 @@
 import { Injectable, inject } from "@angular/core";
 import { Actions, ROOT_EFFECTS_INIT, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { map, skip, switchMap, take, tap } from "rxjs/operators";
+import { catchError, map, skip, switchMap, take, tap } from "rxjs/operators";
 import { quizFeature } from "./app.feature";
-import { changeLanguage, signIn, signUp, systemActions } from "./app.actions";
-import { QuizState } from "./app.state";
+import { changeLanguage, signInError, signInRequest, signInSuccess, signUp, systemActions } from "./app.actions";
+import { State } from "./app.state";
 import { TranslateService } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { AuthService } from "../Services/auth.service";
@@ -32,11 +32,11 @@ loadFromStorage = createEffect(() => inject(Actions).pipe(
   ofType(ROOT_EFFECTS_INIT), 
   take(1), 
   switchMap((_) => {
-    var newState = JSON.parse(localStorage.getItem(quizFeature.name)!) as QuizState
+    var newState = JSON.parse(localStorage.getItem(quizFeature.name)!) as State
 
     const storedLanguage = newState?.language || localStorage.getItem('language') || 'he';
 
-    return of(systemActions.resetState({state:newState }) , changeLanguage({ language: storedLanguage }))
+    return of(changeLanguage({ language: storedLanguage }))
 })
 ), {
   functional: true
@@ -70,13 +70,23 @@ loadFromStorage = createEffect(() => inject(Actions).pipe(
 
 signInEffect$ = createEffect(() =>
 this.actions$.pipe(
-  ofType(signIn),  // Listen for the changeLanguage action
+  ofType(signInRequest),  // Listen for the changeLanguage action
   switchMap(action => {
     console.log(`Signing Up email ${action.email}`)
     // Perform the language switch by updating the TranslateService
-    return this.authService.Login(action.email,action.password);
-  })
+    return this.authService.Login(action.email,action.password).pipe(
+      switchMap(res => {
+        console.log(JSON.stringify(res));
+        return [signInSuccess({token:"",timeout:new Date()})];
+      }),
+      catchError(e =>
+        {
+          console.log(` printing error ${JSON.stringify(e)}`);
+           return  [signInError({error:''})];
+        })
+    );
+  }),
+
 ),
-{ dispatch: false }  // We don't dispatch another action after this effect
 );
 }

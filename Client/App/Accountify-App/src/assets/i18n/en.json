@@ -48,6 +48,7 @@
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "SUBMIT": "Submit",
-    "FORGOT_PASSWORD": "Forgot Password?"
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "FAILURE": "Login failed"
   }
 }

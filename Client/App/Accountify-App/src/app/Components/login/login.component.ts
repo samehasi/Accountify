@@ -9,7 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { signIn } from '../../State/app.actions';
+import { signInRequest } from '../../State/app.actions';
+import { selectIsAuthFailed } from '../../State/app.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +31,7 @@ import { signIn } from '../../State/app.actions';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  protected logInFail$: Observable<boolean>;
 
 goBack() {
   this.router.navigate(['']);  // Change '/home' to your desired route
@@ -36,6 +39,9 @@ goBack() {
   loginForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private translate: TranslateService,private router: Router,private store:Store) {
+
+
+    this.logInFail$ = this.store.select(selectIsAuthFailed);
   }
 
   ngOnInit(): void {
@@ -47,7 +53,7 @@ goBack() {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-    this.store.dispatch(signIn({ email:this.loginForm.get('email')?.value , password:this.loginForm.get('password')?.value }));
+    this.store.dispatch(signInRequest({ email:this.loginForm.get('email')?.value , password:this.loginForm.get('password')?.value }));
       console.log(this.loginForm.value); // Handle the form submission
     }
   }

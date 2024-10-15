@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { signUp } from '../../State/app.actions';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +31,10 @@ export class SignUpComponent implements OnInit {
   }
   signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder , private router:Router,private store:Store) {}
+  constructor(
+    private fb: FormBuilder ,
+     private router:Router ,
+      private authService:AuthService) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -60,8 +64,8 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     if (this.signUpForm.valid) {
       console.log(this.signUpForm.value);  // Handle sign-up logic
-    this.store.dispatch(signUp({ email:this.signUpForm.get('email')?.value , password:this.signUpForm.get('password')?.value }));
-
+    //this.store.dispatch(signUp({ email:this.signUpForm.get('email')?.value , password:this.signUpForm.get('password')?.value }));
+      this.authService.SignUp(this.signUpForm.get('email')?.value , this.signUpForm.get('password')?.value );
     } else {
       console.log('Form is invalid');
     }

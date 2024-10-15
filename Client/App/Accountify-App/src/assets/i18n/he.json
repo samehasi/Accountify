@@ -48,7 +48,10 @@
       "EMAIL": "אימייל",
       "PASSWORD": "סיסמה",
       "SUBMIT": "שלח",
-      "FORGOT_PASSWORD": "שכחת סיסמה?"
+      "FORGOT_PASSWORD": "שכחת סיסמה?",
+      "FAILURE": "נסה שנית"
+
+
     }
   }
   

@@ -24,3 +24,8 @@
     text-align: center;
   }
   
+  /* sign-in.component.scss */
+.error-message {
+  margin-top: 10px;
+  color: red;
+}

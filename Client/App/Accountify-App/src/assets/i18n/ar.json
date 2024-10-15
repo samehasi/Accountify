@@ -48,7 +48,9 @@
       "EMAIL": "البريد الإلكتروني",
       "PASSWORD": "كلمة المرور",
       "SUBMIT": "إرسال",
-      "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟"
+      "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
+      "FAILURE": "<login failed in arabic>"
+
     }
   }
   
