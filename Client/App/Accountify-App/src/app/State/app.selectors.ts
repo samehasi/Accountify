@@ -27,3 +27,8 @@ export const selectIsAuthFailed = createSelector(
   selectLanguageFeature,
   (state: State) => state.authenticationStat.signInState === "Failed"
 );
+
+export const selectIsLoggedIn = createSelector(
+  selectLanguageFeature,
+  (state: State) => state.authenticationStat.token !== null
+);

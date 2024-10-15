@@ -49,8 +49,8 @@
       "PASSWORD": "كلمة المرور",
       "SUBMIT": "إرسال",
       "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
-      "FAILURE": "<login failed in arabic>"
-
+      "FAILURE": "<login failed in arabic>",
+     "LOGOUT": "<sign out in arabic>"
     }
   }
   

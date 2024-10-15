@@ -49,7 +49,9 @@
       "PASSWORD": "סיסמה",
       "SUBMIT": "שלח",
       "FORGOT_PASSWORD": "שכחת סיסמה?",
-      "FAILURE": "נסה שנית"
+      "FAILURE": "נסה שנית",
+      "LOGOUT": "יציאה"
+
 
 
     }

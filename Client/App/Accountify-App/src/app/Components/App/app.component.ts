@@ -15,8 +15,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';  
 import { Store } from '@ngrx/store';
-import { changeLanguage } from '../../State/app.actions';
+import { changeLanguage, signOut } from '../../State/app.actions';
 import { LanguagePickerComponent as LanguagePicker } from '../language-picker/language-picker.component';
+import { selectIsLoggedIn } from '../../State/app.selectors';
 // Factory function for loading translation files
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,6 +60,11 @@ features = [
     description: 'FEATURE_BOOKKEEPING_DESC'
   }
 ];
+protected isLoggedIn$: Observable<boolean>;
+protected signout()
+{
+  this.store.dispatch(signOut());
+}
 
 protected getWeather() {
     this.serverResponse= this.weatherForecastClient.getWeatherForecast().pipe(
@@ -71,6 +77,7 @@ map (x => {
       );
 }
   constructor(public translate: TranslateService,private weatherForecastClient: Client,private store: Store) {
+    this.isLoggedIn$ = this.store.select(selectIsLoggedIn).pipe(tap(x=> console.log(`loggedin? ${x}`)));
   }
   title = 'Accountify-App';
 }

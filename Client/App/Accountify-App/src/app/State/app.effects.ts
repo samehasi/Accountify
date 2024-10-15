@@ -3,11 +3,12 @@ import { Actions, ROOT_EFFECTS_INIT, createEffect, ofType } from "@ngrx/effects"
 import { Store } from "@ngrx/store";
 import { catchError, map, skip, switchMap, take, tap } from "rxjs/operators";
 import { quizFeature } from "./app.feature";
-import { changeLanguage, signInError, signInRequest, signInSuccess, signUp, systemActions } from "./app.actions";
+import { changeLanguage, signInError, signInRequest, signInSuccess, signOut, signUp, systemActions } from "./app.actions";
 import { State } from "./app.state";
 import { TranslateService } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { AuthService } from "../Services/auth.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AppEffects {
@@ -15,14 +16,15 @@ export class AppEffects {
   constructor(
     private actions$: Actions,  // NgRx Actions stream
     private translateService: TranslateService,  // ngx-translate service
-    private authService: AuthService
+    private authService: AuthService,
+    private router:Router
   ) {}
 
   saveToStorage = createEffect(() => inject(Store)
   .select(quizFeature.selectQuizState)
   .pipe(
       skip(1), 
-      tap(state => localStorage.setItem(quizFeature.name, JSON.stringify(state)))
+      tap(state => localStorage.setItem('lang', JSON.stringify(state.language)))
   ), {
       functional: true, dispatch: false
   }    
@@ -32,11 +34,24 @@ loadFromStorage = createEffect(() => inject(Actions).pipe(
   ofType(ROOT_EFFECTS_INIT), 
   take(1), 
   switchMap((_) => {
-    var newState = JSON.parse(localStorage.getItem(quizFeature.name)!) as State
+    const storedLang = JSON.parse(localStorage.getItem('lang')!) as string ?? 'en'
+    const storedToken =  JSON.parse(localStorage.getItem('token')!) as string
+    const storedTTimeout =  JSON.parse(localStorage.getItem('timeout')!) as string
 
-    const storedLanguage = newState?.language || localStorage.getItem('language') || 'he';
+    let actions = [];
 
-    return of(changeLanguage({ language: storedLanguage }))
+    if(storedToken !== null && storedTTimeout !== null)
+    {
+    actions.push(signInSuccess({ token: storedToken , timeout:new Date(storedTTimeout) }));
+
+    }
+    actions.push(changeLanguage({ language: 'en' }));
+
+
+    return actions;
+
+
+
 })
 ), {
   functional: true
@@ -77,7 +92,10 @@ this.actions$.pipe(
     return this.authService.Login(action.email,action.password).pipe(
       switchMap(res => {
         console.log(JSON.stringify(res));
-        return [signInSuccess({token:"",timeout:new Date()})];
+        localStorage.setItem('token', JSON.stringify("koko"));
+        localStorage.setItem('timeout', JSON.stringify(new Date()));
+        this.router.navigate(['/']);
+        return [signInSuccess({token:"koko",timeout:new Date()})];
       }),
       catchError(e =>
         {
@@ -89,4 +107,17 @@ this.actions$.pipe(
 
 ),
 );
+
+signOutEffect$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(signOut),  // Listen for the changeLanguage action
+    tap(state => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('timeout')
+  })
+),
+{ dispatch: false }  // We don't dispatch another action after this effect
+);
+
+
 }

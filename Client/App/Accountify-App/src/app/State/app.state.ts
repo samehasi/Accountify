@@ -27,7 +27,7 @@ export const INITIAL_STATE: State = {
         signInErrorMessage: '',
         signUpState: "Idle",
         signUpErrorMessage: '',
-        token: '',
+        token: null,
         tokenTimeout: null
     }
 }

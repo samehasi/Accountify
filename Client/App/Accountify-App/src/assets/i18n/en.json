@@ -49,6 +49,7 @@
     "PASSWORD": "Password",
     "SUBMIT": "Submit",
     "FORGOT_PASSWORD": "Forgot Password?",
-    "FAILURE": "Login failed"
+    "FAILURE": "Login failed",
+    "LOGOUT": "Sign out"
   }
 }
